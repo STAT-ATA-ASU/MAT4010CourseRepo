@@ -1,0 +1,24 @@
+---
+title: "Assignments"
+author: "Alan Arnholt"
+date: 'Last Updated on: `r Sys.Date()`'
+output: html_document
+---
+
+* Jan 11:
+* ~~Jan 18:~~ **No Class**
+* Jan 25:
+* Feb 1:
+* Feb 8:
+* Feb 15:
+* Feb 22:
+* Feb 29:
+* ~~Mar 7 - Mar 11~~ **No Class - Spring Break**
+* Mar 14:
+* Mar 21:
+* ~~Mar 28:~~ **No Class**
+* Apr 4:
+* Apr 11:
+* Apr 18:
+* Apr 25:
+* May 2:
