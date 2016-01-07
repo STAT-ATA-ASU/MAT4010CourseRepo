@@ -6,7 +6,9 @@ output: html_document
 ---
 
 
-* The course syllabus is stored in the `Syllabus` directory of the MAT 4010 repository.
+* The course syllabus is stored in the [`Syllabus`](./Syllabus/index.html) directory of the MAT 4010 repository.
+
+* Course pacing and assignments are stored in the [`Assignments`](./Assignments/index.html) directory of the MAT 4010 repository.
 
 * Questions related to course materials should be addressed with the [piazza account for MAT 4010](https://piazza.com/class/ij30uq82d4p2di).
 
