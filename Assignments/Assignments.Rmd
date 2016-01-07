@@ -1,5 +1,5 @@
 ---
-title: "Assignments"
+title: "Assignments MAT 4010"
 author: "Alan Arnholt"
 date: 'Last Updated on: `r Sys.Date()`'
 output: html_document
