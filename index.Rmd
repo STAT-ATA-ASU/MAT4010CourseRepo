@@ -2,7 +2,10 @@
 title: "MAT 4010 Homepage"
 author: ""
 date: 'Last Updated on: `r Sys.Date()`'
-output: html_document
+output: 
+  html_document: 
+    highlight: textmate
+    theme: readable
 ---
 
 
@@ -12,6 +15,7 @@ output: html_document
 
 * Questions related to course materials should be addressed with the [piazza account for MAT 4010](https://piazza.com/class/ij30uq82d4p2di).
 
+* [Class RStudio Server](htpps://mathr.math.appstate.edu)  (you must be registered in the course to access the server)
 
 # Resources you may find helpful
 
@@ -53,7 +57,7 @@ output: html_document
 * [Graph Catalog `ggplot2`](http://shinyapps.stat.ubc.ca/r-graph-catalog/)
 * [The Grammar and Graphics of Data Science (Video)](https://www.rstudio.com/resources/webinars/the-grammar-and-graphics-of-data-science/) (58:50)
 
-## Using `dplyr`
+## Using [`dplyr`](https://cran.r-project.org/web/packages/dplyr/index.html)
 
 * [`dplyr` video1-tutorial](http://www.dataschool.io/dplyr-tutorial-for-faster-data-manipulation-in-r/)
 * [`dplyr` video2-tutorial](http://www.dataschool.io/dplyr-tutorial-part-2/)
