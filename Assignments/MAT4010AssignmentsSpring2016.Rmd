@@ -28,7 +28,7 @@ Watch the following Videos:
 
 * Watch this [video](https://www.youtube.com/watch?v=ZFaWxxzouCY&list=PLjTlxb-wKvXNSDfcKPFH2gzHGyjpeCZmJ&index=3) which provides some background on asking questions.  This stackoverflow thread details how to create a [minimal R reproducible example](http://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example/5963610#5963610). Please read [How To Ask Questions The Smart Way](http://www.catb.org/~esr/faqs/smart-questions.html) by Eric Raymond and Rick Moen and heed their advice.
 
-* Read pages 1-37 of _Hands-On Programming with R_.  Create an `Rscripts` folder inside your private repository and store all code in the `Rscripts`  folder for `Project 1`.
+* Read pages 1-37 (Chapters one and two) of _Hands-On Programming with R_.  Create an `Rscripts` folder inside your private repository and store all code in the `Rscripts`  folder for `Project 1`.
 
 
 **~~Jan 18:~~ No Class**
