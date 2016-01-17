@@ -2,8 +2,9 @@
 title: "MAT 4010 Homepage"
 author: ""
 date: 'Last Updated on: `r format(Sys.time(), "%b %d, %Y at %X")`'
-output: 
-  html_document: 
+output:
+  html_document:
+    css: asu.css
     highlight: textmate
     theme: readable
 ---
@@ -17,7 +18,7 @@ output:
 
 * [Class RStudio Server](htpps://mathr.math.appstate.edu)  (you must be registered in the course to access the server)
 
-# Resources you may find helpful
+## Resources you may find helpful
 
 
 [John Chambers recounts the history of S and R](http://blog.revolutionanalytics.com/2014/01/john-chambers-recounts-the-history-of-s-and-r.html) (10:10)
