@@ -36,6 +36,12 @@ Watch the following Videos:
 
 **Jan 25:**
 
+* Go over cloning as needed
+* Writing R functions
+* Create an R package - polish documentation during the week
+* Read chapters three and four in _Hands-On Programming with R_
+* Read chapters one through four of _R Packages_
+
 **Feb 1:**
 
 **Feb 8:**
