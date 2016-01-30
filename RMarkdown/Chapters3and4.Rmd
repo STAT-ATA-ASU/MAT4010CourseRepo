@@ -215,7 +215,7 @@ deck2 <- shuffle(cards = deck)
 deck2[1:5, ]
 ```
 
-## Dollar Signas and Double Brackets
+## Dollar Signs and Double Brackets
 
 ```{r}
 deck$value

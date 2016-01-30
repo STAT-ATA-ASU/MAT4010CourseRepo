@@ -140,14 +140,14 @@ hand1</code></pre>
 <h2>Dates and Times</h2>
 <pre class="r"><code>now &lt;- Sys.time()
 now</code></pre>
-<pre><code>[1] &quot;2016-01-30 15:47:51 EST&quot;</code></pre>
+<pre><code>[1] &quot;2016-01-30 16:00:31 EST&quot;</code></pre>
 <pre class="r"><code>typeof(now)</code></pre>
 <pre><code>[1] &quot;double&quot;</code></pre>
 <pre class="r"><code>class(now)</code></pre>
 <pre><code>[1] &quot;POSIXct&quot; &quot;POSIXt&quot; </code></pre>
 <pre class="r"><code>SEC &lt;- unclass(now)
 SEC</code></pre>
-<pre><code>[1] 1454186872</code></pre>
+<pre><code>[1] 1454187632</code></pre>
 <p>The number stored in <code>SEC</code> represents the number of seconds that have passed between the time and 12:00 AM January 1st 1970 (in the Universal Time Coordinated (UTC) zone).</p>
 </div>
 <div id="factors" class="section level2">
@@ -226,8 +226,8 @@ Value = 13:1
 deck &lt;- data.frame(face = rep(Face, 4), suit = rep(Suit, each = 13), value = rep(Value, 4), stringsAsFactors = FALSE)
 library(DT)
 datatable(deck)</code></pre>
-<p><div id="htmlwidget-7491" style="width:100%;height:auto;" class="datatables"></div>
-<script type="application/json" data-for="htmlwidget-7491">{"x":{"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52"],["king","queen","jack","ten","nine","eight","seven","six","five","four","three","two","ace","king","queen","jack","ten","nine","eight","seven","six","five","four","three","two","ace","king","queen","jack","ten","nine","eight","seven","six","five","four","three","two","ace","king","queen","jack","ten","nine","eight","seven","six","five","four","three","two","ace"],["spades","spades","spades","spades","spades","spades","spades","spades","spades","spades","spades","spades","spades","clubs","clubs","clubs","clubs","clubs","clubs","clubs","clubs","clubs","clubs","clubs","clubs","clubs","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","hearts","hearts","hearts","hearts","hearts","hearts","hearts","hearts","hearts","hearts","hearts","hearts","hearts"],[13,12,11,10,9,8,7,6,5,4,3,2,1,13,12,11,10,9,8,7,6,5,4,3,2,1,13,12,11,10,9,8,7,6,5,4,3,2,1,13,12,11,10,9,8,7,6,5,4,3,2,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> </th>\n      <th>face</th>\n      <th>suit</th>\n      <th>value</th>\n    </tr>\n  </thead>\n</table>","options":{"columnDefs":[{"className":"dt-right","targets":3},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script></p>
+<p><div id="htmlwidget-4243" style="width:100%;height:auto;" class="datatables"></div>
+<script type="application/json" data-for="htmlwidget-4243">{"x":{"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52"],["king","queen","jack","ten","nine","eight","seven","six","five","four","three","two","ace","king","queen","jack","ten","nine","eight","seven","six","five","four","three","two","ace","king","queen","jack","ten","nine","eight","seven","six","five","four","three","two","ace","king","queen","jack","ten","nine","eight","seven","six","five","four","three","two","ace"],["spades","spades","spades","spades","spades","spades","spades","spades","spades","spades","spades","spades","spades","clubs","clubs","clubs","clubs","clubs","clubs","clubs","clubs","clubs","clubs","clubs","clubs","clubs","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","hearts","hearts","hearts","hearts","hearts","hearts","hearts","hearts","hearts","hearts","hearts","hearts","hearts"],[13,12,11,10,9,8,7,6,5,4,3,2,1,13,12,11,10,9,8,7,6,5,4,3,2,1,13,12,11,10,9,8,7,6,5,4,3,2,1,13,12,11,10,9,8,7,6,5,4,3,2,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> </th>\n      <th>face</th>\n      <th>suit</th>\n      <th>value</th>\n    </tr>\n  </thead>\n</table>","options":{"columnDefs":[{"className":"dt-right","targets":3},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script></p>
 </div>
 <div id="reading-a-file-from-a-secure-web-site-using-readrread_csv-and-repmissource_data" class="section level2">
 <h2>Reading a file from a secure web site using <code>readr::read_csv()</code> and <code>repmis::source_data()</code></h2>
@@ -247,8 +247,8 @@ head(deck2)</code></pre>
 <pre><code>SHA-1 hash of the downloaded data file is:
 a1cdb425b6cd2b030f9538257b7c2a61c6e6c8b1</code></pre>
 <pre class="r"><code>datatable(deck1)</code></pre>
-<p><div id="htmlwidget-2670" style="width:100%;height:auto;" class="datatables"></div>
-<script type="application/json" data-for="htmlwidget-2670">{"x":{"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52"],["king","queen","jack","ten","nine","eight","seven","six","five","four","three","two","ace","king","queen","jack","ten","nine","eight","seven","six","five","four","three","two","ace","king","queen","jack","ten","nine","eight","seven","six","five","four","three","two","ace","king","queen","jack","ten","nine","eight","seven","six","five","four","three","two","ace"],["spades","spades","spades","spades","spades","spades","spades","spades","spades","spades","spades","spades","spades","clubs","clubs","clubs","clubs","clubs","clubs","clubs","clubs","clubs","clubs","clubs","clubs","clubs","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","hearts","hearts","hearts","hearts","hearts","hearts","hearts","hearts","hearts","hearts","hearts","hearts","hearts"],[13,12,11,10,9,8,7,6,5,4,3,2,1,13,12,11,10,9,8,7,6,5,4,3,2,1,13,12,11,10,9,8,7,6,5,4,3,2,1,13,12,11,10,9,8,7,6,5,4,3,2,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> </th>\n      <th>face</th>\n      <th>suit</th>\n      <th>value</th>\n    </tr>\n  </thead>\n</table>","options":{"columnDefs":[{"className":"dt-right","targets":3},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script></p>
+<p><div id="htmlwidget-9309" style="width:100%;height:auto;" class="datatables"></div>
+<script type="application/json" data-for="htmlwidget-9309">{"x":{"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52"],["king","queen","jack","ten","nine","eight","seven","six","five","four","three","two","ace","king","queen","jack","ten","nine","eight","seven","six","five","four","three","two","ace","king","queen","jack","ten","nine","eight","seven","six","five","four","three","two","ace","king","queen","jack","ten","nine","eight","seven","six","five","four","three","two","ace"],["spades","spades","spades","spades","spades","spades","spades","spades","spades","spades","spades","spades","spades","clubs","clubs","clubs","clubs","clubs","clubs","clubs","clubs","clubs","clubs","clubs","clubs","clubs","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","diamonds","hearts","hearts","hearts","hearts","hearts","hearts","hearts","hearts","hearts","hearts","hearts","hearts","hearts"],[13,12,11,10,9,8,7,6,5,4,3,2,1,13,12,11,10,9,8,7,6,5,4,3,2,1,13,12,11,10,9,8,7,6,5,4,3,2,1,13,12,11,10,9,8,7,6,5,4,3,2,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> </th>\n      <th>face</th>\n      <th>suit</th>\n      <th>value</th>\n    </tr>\n  </thead>\n</table>","options":{"columnDefs":[{"className":"dt-right","targets":3},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script></p>
 </div>
 <div id="saving-data" class="section level2">
 <h2>Saving Data</h2>
@@ -346,8 +346,8 @@ deck2[1:5, ]</code></pre>
 10  four   spades     4
 23  four    clubs     4</code></pre>
 </div>
-<div id="dollar-signas-and-double-brackets" class="section level2">
-<h2>Dollar Signas and Double Brackets</h2>
+<div id="dollar-signs-and-double-brackets" class="section level2">
+<h2>Dollar Signs and Double Brackets</h2>
 <pre class="r"><code>deck$value</code></pre>
 <pre><code> [1] 13 12 11 10  9  8  7  6  5  4  3  2  1 13 12 11 10  9  8  7  6  5  4
 [24]  3  2  1 13 12 11 10  9  8  7  6  5  4  3  2  1 13 12 11 10  9  8  7
