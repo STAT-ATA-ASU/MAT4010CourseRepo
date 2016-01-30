@@ -44,6 +44,10 @@ Watch the following Videos:
 
 **Feb 1:**
 
+* Go over RMarkdown documents for chapters [1-2](../RMarkdown/Chapters1and2.html) and [3-4](../RMarkdown/Chapters3and4.html).
+* Read chapters five and skim six in _Hands-On Programming with R_
+
+
 **Feb 8:**
 
 **Feb 15:**

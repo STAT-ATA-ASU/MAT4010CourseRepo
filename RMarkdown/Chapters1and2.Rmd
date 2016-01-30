@@ -1,0 +1,229 @@
+---
+title: "Chapters One and Two"
+author: "Alan Arnholt"
+date: 'Last Updated: `r Sys.Date()`'
+output: html_document
+---
+
+```{r, label = "SETUP", echo = FALSE, results= 'hide', message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(comment = NA, fig.align = 'center', fig.height = 5, fig.width = 5,  warning = FALSE, message = FALSE, tidy.opts=list(blank = TRUE, width.cutoff = 75))
+```
+
+The outer product $\boldsymbol{u} \otimes \boldsymbol{v}^T$ is equivalent to a matrix multiplication $\boldsymbol{u}\boldsymbol{v}^T$, provided $\boldsymbol{u}$ is represented as a $m \times 1$ column vector and $\boldsymbol{v}$ as a $n \times$ column vector.  See [Wikipedia](https://en.wikipedia.org/wiki/Outer_product) for more details.
+
+```{r}
+u <- 1:4
+v <- 1:3
+uOUTERv <- u %o% v
+uOUTERv
+```
+
+The inner product $\langle \boldsymbol{u}, \boldsymbol{v}\rangle = \boldsymbol{u}^T\boldsymbol{v}$ provided $m=n$ yields a scalar (or $1 \times 1$ matrix).
+
+```{r}
+u <- 1:6
+v <- 1:6
+u %*% v
+sum(u^2)
+```
+
+## Functions
+
+When working with nested functions, operations all start with the innermost operation and work to the outermost.
+
+```{r}
+set.seed(3)
+round(mean(sample(1:10)))
+```
+
+## Sample with Replacement
+
+```{r}
+set.seed(4)
+sample(1:6, size = 2, replace = FALSE) # replace = FALSE is the default
+sample(1:6, size = 2, replace = TRUE)
+```
+
+## Writing Your Own Functions
+
+```{r}
+roll <- function(){
+  die <- 1:6
+  dice <- sample(die, size = 2, replace = TRUE)
+  sum(dice)
+}
+roll()
+roll()
+roll()
+```
+
+```{r}
+roll2 <- function(bones){
+  dice <- sample(bones, size = 2, replace = TRUE)
+  sum(dice)
+}
+roll2(bones = 1:4)
+roll2(bones = 1:6)
+roll2(bones = 1:10)
+```
+
+## Supplying Default Arguments
+
+```{r}
+roll2 <- function(bones = 1:6){
+  dice <- sample(bones, size = 2, replace = TRUE)
+  sum(dice)
+}
+roll2()
+```
+
+## Chapter 2
+
+### `ggplot2`
+
+#### Scaterplots
+
+```{r}
+x <- seq(from = -1, to = 1, by  = 0.2)
+x
+y <- x^3
+DF <- data.frame(x = x, y = y)
+library(ggplot2)
+ggplot(data = DF, aes(x = x, y = y)) + 
+  geom_point() +
+  theme_bw()
+```
+
+#### Histograms
+
+```{r}
+x <- c(1, 2, 2, 2, 3, 3)
+DF2 <- data.frame(x = x)
+ggplot(data = DF2, aes(x = x)) +
+  geom_histogram(binwidth = 1, fill = "purple", color = "black") + 
+  theme_bw()
+```
+
+### `ggvis`
+
+#### Scatterplots
+
+```{r, message = FALSE, warning = FALSE}
+library(ggvis)
+DF %>% 
+  ggvis(x = ~x, y = ~y) %>%
+  layer_points()
+```
+
+#### Histograms
+
+```{r}
+DF2 %>% 
+  ggvis(x = ~x, fill := "green") %>% 
+  layer_histograms(width = 1)
+```
+
+## Exercise
+
+```{r}
+x3 <- c(0, 1, 1, 2, 2, 2, 3, 3, 4)
+DF3 <- data.frame(x = x3)
+# Use ggplot2 first
+ggplot(data = DF3, aes(x = x)) + 
+  geom_histogram(binwidth = 1, fill = "red", color = "black") + 
+  theme_bw()
+# Use ggvis next
+DF3 %>% 
+  ggvis(x = ~x, fill := "lightblue") %>% 
+  layer_histograms(width = 1)
+```
+
+### Using `replicate()`
+
+```{r}
+replicate(10, 3 + 3.24)
+replicate(10, roll())
+rolls <- replicate(10000, roll())
+STR <- system.time(replicate(10000, roll()))
+STR
+DF4 <- data.frame(rolls = rolls)
+# Use ggplot2 first
+ggplot(data = DF4, aes(x = rolls)) +
+  geom_histogram(binwidth = 1, fill = "wheat", color = "black") +
+  theme_bw()
+# Use ggvis next
+DF4 %>% 
+  ggvis(x = ~rolls, fill := "salmon") %>% 
+  layer_histograms(width = 1)
+```
+
+### Another Approach to `replicate()`
+
+```{r}
+N <- 10000
+rolls <- numeric(N)
+for(i in 1:N){
+  rolls[i] <- roll()
+}
+# Make this into a function
+FL <- function(N = 10000){
+  rolls <- numeric(N)
+  for(i in 1:N){
+  rolls[i] <- roll()
+}
+}
+STL <- system.time(FL())
+STL
+DF5 <- data.frame(rolls = rolls)
+# Use ggplot2 first
+ggplot(data = DF5, aes(x = rolls)) +
+  geom_histogram(binwidth = 1, fill = "purple", color = "black") +
+  theme_bw()
+# Use ggvis next
+DF5 %>% 
+  ggvis(x = ~rolls, fill := "indianred") %>% 
+  layer_histograms(width = 1)
+```
+
+## Exercise
+
+```{r}
+roll <- function(){
+  die <- 1:6
+  dice <- sample(die, size = 2, replace = TRUE, 
+                 prob = c(1/8, 1/8, 1/8, 1/8, 1/8, 3/8))
+  sum(dice)
+}
+rolls <- replicate(10000, roll())
+DF6 <- data.frame(rolls = rolls)
+# Use ggplot2 first
+ggplot(data = DF6, aes(x = rolls)) +
+  geom_histogram(binwidth = 1, fill = "steelblue", color = "black") +
+  theme_bw()
+# Use ggvis next
+DF6 %>% 
+  ggvis(x = ~rolls, fill := "magenta") %>% 
+  layer_histograms(width = 1)
+```
+
+## Uber Die
+
+```{r}
+roll <- function(dietype = 1:6, probvalues = rep(1/length(dietype), length(dietype))){
+  if(sum(probvalues) != 1)
+    stop("'probvalues' must add to one")
+  dice <- sample(dietype, size = 2, replace = TRUE, prob = probvalues)
+  sum(dice)
+}
+roll(dietype = c(1,3,5,7))
+rolls <- replicate(10000, roll(dietype = 1:20))
+DF7 <- data.frame(rolls = rolls)
+# Use ggplot2 first
+ggplot(data = DF7, aes(x = rolls)) +
+  geom_histogram(binwidth = 1, fill = "lightblue", color = "black") +
+  theme_bw()
+# Use ggvis next
+DF7 %>% 
+  ggvis(x = ~rolls, fill := "orange") %>% 
+  layer_histograms(width = 1)
+```
