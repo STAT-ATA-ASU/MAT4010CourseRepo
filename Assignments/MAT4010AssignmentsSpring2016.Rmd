@@ -45,7 +45,7 @@ Watch the following Videos:
 **Feb 1:**
 
 * Go over RMarkdown documents for chapters [1-2](../RMarkdown/Chapters1and2.html) and [3-4](../RMarkdown/Chapters3and4.html)
-* Go over [Package Building](../Rmarkdown/PackageBuilding.html)
+* Go over [Package Building](../RMarkdown/PackageBuilding.html)
 * Add `shuffle` to your personal package
 * Try out each others packages (`devtools::install_github()`) 
 * Discuss chapters one through four of _R Packages_
