@@ -3,6 +3,7 @@ title: "Package Building Using RStudio"
 author: "Alan Arnholt"
 date: 'Last Updated: `r Sys.Date()`'
 output: html_document
+bibliography: PackagesUsed.bib
 ---
 
 ```{r, label = "SETUP", echo = FALSE, results= 'hide', message = FALSE, warning = FALSE}
@@ -31,6 +32,7 @@ Package: MyPackage
 Type: Package
 Title: What the Package Does (Title Case)
 Version: 0.1.0
+Date: 2016-01-31
 Authors@R: c(person("Alan", "Arnholt", email = "arnholtat@appstate.edu", 
               role = c("aut", "cre")),
              person("Erin", "Kreiling", email = "kreilingeg@appstate.edu", 
@@ -120,5 +122,56 @@ output:
 
 * Modify the `.gitignore` file to ignore README.Rmd and README.html
 
+* Modify the `.Rbuildignore` file to ignore README.Rmd and README.html
+
 * Commit and push changes
+
+
+## Automagic Generation of `R` Package References
+
+Suppose the following `R` packages are used for a project: `simplemathr`, `DT`, `ggplot2`, `ISLR`, `knitr`, `plotly`, and `rmarkdown`.  
+
+1. Create an object named `PackagesUsed`.
+2. Write the packages used to a `*.bib` file.
+3. Load the packages with `lapply()`.
+4. Add a `bibliography` entry to the YAML.
+5. Cite the package using `@R-packagename` (look at the `*.bib` file for the exact name)
+6. Add a `References` section header (`## References`) at the very end of the document.  The references will appear (provided they are cited) after the header.
+
+```{r, eval = FALSE}
+PackagesUsed <- c("simplemathr", "DT", "ggplot2", "ISLR", "knitr", "plotly", "rmarkdown")
+# Write bib information
+knitr::write_bib(PackagesUsed, file = "./PackagesUsed.bib")
+# Load packages
+lapply(PackagesUsed, library, character.only = TRUE)
+```
+
+Example YAML:
+
+```
+---
+title: "Some Title"
+author: "Alan Arnholt"
+date: '`r format(Sys.time(), "%b %d, %Y")`'
+bibliography: PackagesUsed.bib
+output: html_document
+---
+```
+
+```{r, echo = FALSE, message = FALSE, results = 'hide'}
+PackagesUsed <- c("simplemathr", "DT", "ggplot2", "ISLR", "knitr", "plotly", "rmarkdown")
+# Write bib information
+knitr::write_bib(PackagesUsed, file = "./PackagesUsed.bib")
+# Load packages
+lapply(PackagesUsed, library, character.only = TRUE)
+```
+
+This document uses `simplemathr` by @R-simplemathr, `DT` by @R-DT, `ggplot2` by @R-ggplot2, `ISLR` by @R-ISLR, `plotly` by @R-plotly, `rmarkdown` by @R-rmarkdown, and `knitr` by @R-knitr.  
+
+The previous line with citations was created using:
+
+```
+This document uses `simplemathr` by @R-simplemathr, `DT` by @R-DT, `ggplot2` by @R-ggplot2, `ISLR` by @R-ISLR, `plotly` by @R-plotly, `rmarkdown` by @R-rmarkdown, and `knitr` by @R-knitr.  
+```
+## References
 
