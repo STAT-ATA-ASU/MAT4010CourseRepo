@@ -77,7 +77,7 @@ NULL
 
 ![projOptions](projectOptions.png)
 
-* Click the `Configure` box to the left of `Genereate documentation with Roxygen` and check all options as shown below.
+* Click the `Configure` box to the right of `Genereate documentation with Roxygen` and check all options as shown below.
 
 ![roxygenOptions](roxygenOptions.png)
 
