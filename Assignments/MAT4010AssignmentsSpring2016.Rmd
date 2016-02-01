@@ -50,6 +50,7 @@ Watch the following Videos:
 * Try out each others packages (`devtools::install_github()`) 
 * Discuss chapters one through four of _R Packages_
 * Read chapters five and six in _Hands-On Programming with R_
+* Read chapters five and six of _R Packages_
 
 
 **Feb 8:**
