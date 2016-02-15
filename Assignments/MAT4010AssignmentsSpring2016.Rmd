@@ -60,16 +60,16 @@ Watch the following Videos:
 
 **Feb 15:**
 
-* Discuss chapters five and six of _Hands-On Programming with R_
+* Discuss chapters [five and six](../RMarkdown/Chapters5and6.html) of _Hands-On Programming with R_
 * Disucss chapters five and six of _R Packages_
-* Read and summarize chapter seven of _Hands-On Programming with R_ in an Rmarkdown document.
+* Read and summarize chapter [seven](../RMarkdown/Chapter7.html) of _Hands-On Programming with R_ in an Rmarkdown document.
 * Read chapter 7 (_Testing_) of _R Packages_
 * [Unit Testing Slides](http://www.is.uni-freiburg.de/ressourcen/algorithm-design-and-software-engineering-oeffentlicher-zugriff/11_softwaretesting.pdf)
 
 **Feb 22:**
 
 * Discuss chapters six and seven of _Hands-On Programming with R_
-* Put all chapter summaries into one single rmarkdown document.
+* Put all chapter summaries into one single rmarkdown document.  
 
 
 **Feb 29:**
