@@ -1,13 +1,19 @@
 ---
-title: "Chapters 3 and 4"
+title: "Chapters 3 and 4 Notes"
 author: "Alan Arnholt"
-date: 'Last Updated: `r Sys.Date()`'
-output: html_document
+date: "2/15/2016"
+output: 
+  html_document: 
+    highlight: textmate
+    theme: readable
 ---
 
-```{r, label = "SETUP", echo = FALSE, results= 'hide', message = FALSE, warning = FALSE}
-knitr::opts_chunk$set(comment = NA, fig.align = 'center', fig.height = 5, fig.width = 5,  warning = FALSE, message = FALSE, tidy.opts=list(blank = TRUE, width.cutoff = 75))
+```{r, echo = FALSE, results= 'hide', message = FALSE, warning = FALSE}
+set.seed(123)
+library(knitr)
+knitr::opts_chunk$set(comment = NA, fig.align = 'center', fig.height = 5, fig.width = 5, prompt = FALSE, highlight = TRUE, tidy = FALSE, warning = FALSE, message = FALSE, tidy.opts=list(blank = TRUE, width.cutoff= 75, cache = FALSE))
 ```
+
 
 # Chapter 3 Notes
 

@@ -1,0 +1,310 @@
+---
+title: "Class 2-8-15"
+author: "Alan T. Arnholt"
+date: "February 8, 2016"
+output: 
+  html_document: 
+    highlight: textmate
+    theme: readable
+---
+
+```{r, echo = FALSE, results= 'hide', message = FALSE, warning = FALSE}
+set.seed(123)
+library(knitr)
+knitr::opts_chunk$set(comment = NA, fig.align = 'center', fig.height = 5, fig.width = 5, prompt = FALSE, highlight = TRUE, tidy = FALSE, warning = FALSE, message = FALSE, tidy.opts=list(blank = TRUE, width.cutoff= 75, cache = FALSE))
+```
+
+# Chapter 5
+
+## Changing Values in Place
+
+```{r}
+vec <- c(0, 0, 0, 0, 0, 0)
+vec
+vec[1]
+vec[1] <- 1000
+vec
+vec[c(1, 3, 5)] <- c(1, 1, 1)
+vec
+vec[4:6] <- vec[4:6] + 1
+vec
+vec[7] <- 0
+vec
+```
+
+Start by creating a deck of cards:
+
+```{r}
+FACE <- c("king", "queen", "jack", "ten", "nine", "eight", "seven", "six", "five", "four", "three", "two", "ace")
+SUIT <- c("spades", "clubs", "diamonds", "hearts")
+VALUE <- 13:1
+deck <- data.frame(face = rep(FACE, 4), suit = rep(SUIT, each = 13), value = rep(VALUE, times = 4))
+library(DT)
+datatable(deck)
+```
+
+### Add a Variable
+
+```{r}
+deck2 <- deck
+deck2$new <- 1:52
+datatable(deck2)
+deck2$new <- NULL
+head(deck2)
+```
+
+## Change Particular Values
+
+```{r}
+deck2[c(13, 26, 39, 52), ]
+deck2[c(13, 26, 39, 52), "value"]
+deck2[c(13, 26, 39, 52), 3]
+deck2$value[c(13, 26, 39, 52)]
+deck2$value[c(13, 26, 39, 52)] <- c(14, 14, 14, 14)
+deck2$value[c(13, 26, 39, 52)]
+# OR
+deck2$value[c(13, 26, 39, 52)] <- 14
+deck2$value[c(13, 26, 39, 52)]
+```
+
+## Recall `shuffle()`
+
+This function still need some work...
+
+```{r}
+shuffle <- function(cards) {
+ random <- sample(1:52, size = 52)
+ cards[random, ]
+}
+deck3 <- shuffle(deck)
+datatable(deck3)
+```
+
+## Logical Operators
+
+```{r}
+1 > 2
+1 > c(0, 1, 2)
+c(1, 2, 3) == c(3, 2, 1)
+1 %in% c(3, 4, 5)
+c(1, 2) %in% c(3, 4, 5)
+c(1, 2, 3) %in% c(3, 4, 5)
+c(1, 2, 3, 4) %in% c(3, 4, 5)
+```
+
+## Exercise
+
+Extract the face column of `deck2` and test whether each value is equal to ace.  As a challenge, use `R` to quickly count how many cards are equal to `ace`.
+
+```{r}
+sum(deck2$face == "ace")
+deck3$face == "ace"
+```
+
+Change the value of `ace` to 14
+
+```{r}
+deck3$value[deck3$face == "ace"] <- 14
+datatable(deck3)
+deck4 <- deck
+```
+
+## Exercise
+
+Assign a value of 1 to every card in `deck4` that has a suit of hearts.
+
+```{r}
+deck4$value[deck4$suit == "hearts"] <- 1
+deck4$value[deck4$suit == "hearts"]
+datatable(deck4)
+```
+
+In hearts, the queen of spades has the most unusual value of all: she’s worth 13 points.
+
+```{r}
+deck4$value[deck4$suit == "spades" & deck4$face == "queen"] <- 13
+deck4$value[deck4$suit == "spades" & deck4$face == "queen"]
+datatable(deck4)
+```
+
+## Exercise
+
+```{r}
+w <- c(-1, 0, 1)
+x <- c(5, 15)
+y <- "February"
+z <- c("Monday", "Tuesday", "Friday")
+w > 0 
+10 < x & x < 20
+y == "February"
+all(z %in% c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"))
+deck5 <- deck
+```
+
+Change the value of all face cards to 10
+
+```{r}
+deck5$value[deck5$face %in% c("king", "queen", "jack")] <- 10
+datatable(deck5)
+```
+
+## Missing Information
+
+```{r}
+1 + NA
+NA == 1
+c(NA, 1:50)
+mean(c(NA, 1:50))
+mean(c(NA, 1:50), na.rm = TRUE)
+NA == NA
+c(1, 2, 3, NA) == NA
+is.na(NA)
+vec <- c(1, 2, 3, NA)
+is.na(vec)
+deck5$value[deck5$face == "ace"] <- NA
+head(deck5, 13)
+```
+
+```{r, echo = FALSE, results= 'hide', message = FALSE, warning = FALSE}
+set.seed(123)
+library(knitr)
+knitr::opts_chunk$set(comment = NA, fig.align = 'center', fig.height = 5, fig.width = 5, prompt = FALSE, highlight = TRUE, tidy = FALSE, warning = FALSE, message = FALSE, tidy.opts=list(blank = TRUE, width.cutoff= 75, cache = FALSE))
+```
+
+
+# Environments
+
+```{r}
+library(pryr)
+library(knitr)
+parenvs(all = TRUE)
+as.environment("package:knitr")
+globalenv()
+baseenv()
+emptyenv()
+```
+
+Next, you can look up an environment's parent with `parent.env`:
+
+```{r}
+parent.env(globalenv())
+```
+
+Notice that the empty environment is the only R environment without a parent:
+
+```{r, error = TRUE}
+parent.env(emptyenv())
+```
+
+You can view the objects saved in an environment with `ls` or `ls.str`. `ls` will return just
+the object names, but `ls.str` will display a little about each object’s structure:
+
+```{r}
+ls(emptyenv())
+ls(globalenv())
+```
+
+You can use `R`’s `$` syntax to access an object in a specific environment. For example, you can access deck from the global environment:
+
+```{r}
+head(globalenv()$deck)
+```
+
+And you can use the assign function to save an object into a particular environment.  First give assign the name of the new object (as a character string). Then give assign the value of the new object, and finally the environment to save the object in:
+
+```{r}
+assign("NewObject", "Value of new object", envir = globalenv())
+globalenv()$NewObject
+```
+
+You can use `environment` to see the current active environment:
+
+```{r}
+environment()
+```
+
+## Evaluation
+
+`R` creates a new environment each time it evaluates a function. `R` will use the new environment as the active environment while it runs the function, and then `R` will return to the environment that you called the function from, bringing the function’s result with it. Let’s call these new environments runtime environments because `R` creates them at runtime to evaluate functions.  We’ll use the following function to explore `R`’s runtime environments. We want to know what the environments look like: what are their parent environments, and what objects do they contain? `show_env` is designed to tell us:
+
+```{r}
+show_env <- function(){
+  list(ran.in = environment(),
+       parent = parent.env(environment()),
+       objects = ls.str(environment()))
+}
+```
+
+`show_env` is itself a function, so when we call `show_env()`, `R` will create a runtime environment to evaluate the function in. The results of `show_env` will tell us the name of the runtime environment, its parent, and which objects the runtime environment contains:
+
+
+```{r}
+a <- show_env()
+a
+b <- a$ran.in
+b
+```
+
+The results reveal that `R` created a new environment to run
+`show_env()` in. The environment had no objects in it, and its parent was the global
+environment. 
+
+Let's run `show_env` again:
+
+```{r}
+show_env()
+```
+
+You can look up a function's origin environment by running `environment` on the function:
+
+```{r}
+environment(PASWR2::z.test)
+environment(PASWR::z.test)
+environment(BSDA::z.test)
+environment(show_env)
+```
+
+
+
+## The Functions
+
+```{r}
+setup <- function(deck) {
+  DECK <- deck
+  DEAL <- function() {
+    card <- deck[1, ]
+    assign("deck", deck[-1, ], envir = parent.env(environment()))
+    card
+  }
+  SHUFFLE <- function(){
+    random <- sample(1:52, size = 52)
+    assign("deck", DECK[random, ], envir = parent.env(environment()))
+  }
+  list(deal = DEAL, shuffle = SHUFFLE)
+}
+cards <- setup(deck)
+deal <- cards$deal
+shuffle <- cards$shuffle
+```
+
+## Where Is All of This?
+
+```{r}
+setup
+environment(setup)
+deal
+environment(deal)
+shuffle
+environment(shuffle)
+```
+
+## Playing Cards Now
+
+```{r}
+shuffle()
+deal()
+deal()
+deal()
+deal()
+deal()
+```

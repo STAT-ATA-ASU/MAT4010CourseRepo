@@ -75,11 +75,11 @@ NULL
 * Click the `build` tab > More > Configure build tools ...
 * Make sure both the `Use devtools package functions if available` and the `Generate documentation with Roxygen` boxes are selected as shown below.
 
-![projOptions](projectOptions.png)
+![projOptions](./PNG/projectOptions.png)
 
 * Click the `Configure` box to the right of `Genereate documentation with Roxygen` and check all options as shown below.
 
-![roxygenOptions](roxygenOptions.png)
+![roxygenOptions](./PNG/roxygenOptions.png)
 
 ## Build Package
 
@@ -93,7 +93,7 @@ NULL
 
 * Create a new repository on GitHub [(https://github.com/new)](https://github.com/new) with the same name as your R package.  Include the package title as the description for the repository.  Leave all other options as is, then click `Create Repository`.
 
-![githubNEW](githubNEW.png)
+![githubNEW](./PNG/githubNEW.png)
 
 * Follow the directions on the new repository page for pushing an existing repository from the command line. The directions will be similar to the following with `YourGitHubUsername` containing your GitHub username.  Copy the commands and paste them at the prompt in a shell.
 
@@ -110,7 +110,7 @@ git push -u origin master
 
 * Create a README.md file using RMarkdown - Edit the RMarkdown options by selecting the down arrow next to the gear box > Output Options > Advanced > (check the) Keep markdown source file box as shown below.
 
-![markdownOptions](markdownOptions.png)
+![markdownOptions](./PNG/markdownOptions.png)
 
 * To keep the markdown source file, one may use the following in the YAML:
 

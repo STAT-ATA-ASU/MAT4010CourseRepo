@@ -1,0 +1,28 @@
+---
+title: "Hands-On Programming with R Notes"
+author: "Alan Arnholt"
+date: '`r Sys.Date()`'
+output: 
+  html_document: 
+    highlight: textmate
+    theme: readable
+---
+
+```{r, label = "SETUP", echo = FALSE, results= 'hide', message = FALSE, warning = FALSE}
+set.seed(123)
+library(knitr)
+knitr::opts_chunk$set(comment = NA, fig.align = 'center', fig.height = 5, fig.width = 5, prompt = FALSE, highlight = TRUE, tidy = FALSE, warning = FALSE, message = FALSE, tidy.opts=list(blank = TRUE, width.cutoff= 75, cache = FALSE))
+```
+
+
+```{r, label = "chap1and2", child = "./Chapters1and2.Rmd", eval = TRUE, message = FALSE}
+```
+
+```{r, label = "chap3and4", child = "./Chapters3and4.Rmd", eval = TRUE, message = FALSE}
+```
+
+```{r, label = "chap5and6", child = "./Chapters5and6.Rmd", eval = TRUE, message = FALSE}
+```
+
+```{r, label = "chap7", child = "./Chapter7.Rmd", eval = TRUE, message = FALSE}
+```
