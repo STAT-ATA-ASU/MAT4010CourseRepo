@@ -70,6 +70,7 @@ Watch the following Videos:
 
 * Discuss chapters six and seven of _Hands-On Programming with R_
 * Put all chapter summaries into one single rmarkdown document.  
+* Discuss Unit Testing
 
 
 **Feb 29:**
