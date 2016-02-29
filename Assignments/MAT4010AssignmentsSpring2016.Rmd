@@ -75,7 +75,7 @@ Watch the following Videos:
 
 **Feb 29:**
 
-* Documenting S3 Classes, Generics, and Methods
+* [Documenting S3 Classes, Generics, and Methods](../RMarkdown/OOP.html)
 * Make sure Travis-CI is passing
 * Work on Group packages - (Individual assignments to follow)
 * Push indiviudal notes from chapters 1-7 (one document) to your private repositories before leaving on Spring Break.  
