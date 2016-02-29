@@ -1,0 +1,279 @@
+---
+title: "Object Oriented Programming"
+author: "Alan Arnholt"
+date: 'Last updated: `r format(Sys.time(), "%b %d, %Y")`'
+output: html_document
+---
+
+```{r, label = "SETUP", echo = FALSE, results= 'hide', message = FALSE, warning = FALSE}
+library(knitr)
+knitr::opts_chunk$set(comment = NA, fig.align = 'center', fig.height = 5, fig.width = 5, prompt = FALSE, highlight = TRUE, tidy = FALSE, warning = FALSE, message = FALSE, tidy.opts=list(blank = TRUE, width.cutoff = 80))
+```
+
+## R Themes^[The Art of R Programming]
+
+* Everything you touch in R - ranging from numbers to character strings to matrices - is an object.
+
+* R promotes *encapsulation*, which is packaging separate but related data items into one class instance.  Encapsulation helps you keep track of related variables, enhancing clarity.
+
+* R classes are *polymorphic*, which means that the same function call leads to different operations for objects of different classes.  For instance, a call to `print()` on an object of a certain class triggers a call to a print function tailored to that class.  Polymorphism promotes usability.
+
+
+
+## S3 Classes
+
+An S3 class consists of a list, with a class name attribute and *dispatch* capability added.
+
+* `class` is an attribute of an object that dictates what message the object can receive and return.
+* `method` is a function that is designed for a specific class.
+* `dispatch` is selection of the class specific method.
+
+## S3 Generic Functions
+
+When a generic function is called, R will dispatch the call to the proper class method, meaning that it will reroute the call to a function defined for the object's class.
+
+1.  A generic function (`plot`, `print`, `summary`, etc.) checks the class of the object.
+2.  A search is done to see if there is an appropriate method for that class.
+3.  If there exists a method for that class, then that method is called on the object and we are finished.
+4.  If a method for a class does not exist, a search is done to see if there is a `default` method for the generic function.  If `default` exists, then it is called.
+5.  If no default exists an error appears.
+
+
+
+```{r}
+plot
+```
+
+Note that the generic function `plot` has `UseMethod("plot")` in its function call.  To see all implementations of a generic function type `methods(GenericFunction)`.
+
+```{r}
+methods(plot)
+```
+
+One way to view the code for a hidden method (one that ends with `*`) is to use the `getAnywhere` function.
+
+```{r}
+getAnywhere(plot.density)
+```
+
+## Writing S3 Classes
+
+A class instance is created by forming a list, with the components of the list being the member variables of the class.  The `class` attribute is set by hand using the `class` function, and then various implementations of generic functions are defined.  Consider the following slightly modified code taken from *S Programming* for a 2 sample equal variance t-test.
+
+Recall that the formula for the 2 sample equal variance t-test is:
+
+$$t_{obs} = \frac{(\bar{x} - \bar{y}) - (\mu_x - \mu_y)}{\sqrt{1/n_x + 1/n_y}\cdot \sqrt{\left((n_x-1)\cdot s_x^2 + (n_y-1)\cdot s_y^2)\right)/(n_x + n_y - 2)}} \sim t_{n_x + n_y -2}$$
+
+```{r}
+ttest <- function(x, y, alpha = 1/20, alternative = "two.sided", ...){
+  if(is.null(class(x))){
+    class(x) <- data.class(x)
+  }
+  UseMethod("ttest")
+}
+```
+
+The `ttest.default` is written next.  Note that a list (`results`) is constructed and the given the class `my.t.test` with the code `class(results) <- "my.t.test"`.
+
+```{r}
+ttest.default <- function(x, y, alpha = 1/20, alternative = "two.sided", ...){
+  choices <- c("two.sided", "greater", "less")
+  alt <- pmatch(alternative, choices)
+  alternative <- choices[alt]
+  # add some checks here
+  yok <- !is.na(y)
+  xok <- !is.na(x)
+  x <- x[xok]
+  y <- y[yok]
+  n1 <- length(x)
+  n2 <- length(y)
+  ndf <- n1 + n2 - 2
+  s2 <- ((n1 - 1)*var(x) + (n2 - 1)*var(y))/ndf
+  tstat <- (mean(x) - mean(y))/sqrt(s2*(1/n1 + 1/n2))
+  # tails
+  if(alternative == "two.sided"){
+    tail.area <- 2 * (1 - pt(abs(tstat), ndf))
+  } else if(alternative == "less") {
+    tail.area <- pt(tstat, ndf)
+  } else {
+    tail.area <- 1 - pt(tstat, ndf)
+  }
+  results <- list("t-stat" = tstat, d.f. = ndf, y1 = x, y2 = y,
+                  alternative = alternative, tail.area = tail.area,
+                  reject = tail.area < alpha, alpha = alpha)
+  class(results) <- "my.t.test"
+  results
+}
+```
+
+Objects of class `my.t.test` will be printed using the generic `print` after defining `print.my.t.test`.
+
+```{r}
+print.my.t.test <- function(x, ...){
+  cat("\n")
+  cat("My Monday Night Modified 2 Sample Equal Variance t-test", "\n")
+  cat("\n")
+  cat(paste("Alternative hypothesis:", x[5]), "\n")
+  cat(paste("Reject the null hypothesis:", x[7]), "\n")
+  cat("\n")
+  print(round(unlist(x[c(1, 2, 6)]), 4))
+  invisible(x)
+}
+```
+
+Objects of class `my.t.test` will be plotted using the generic `plot` after defining `plot.my.t.test`.
+```{r}
+plot.my.t.test <- function(x, ...){
+  boxplot(x[c("y1", "y2")], col = "pink",
+          names = c("Sample 1", "Sample 2"), ...)
+}
+```
+
+Additional methods 
+
+```{r}
+ttest.matrix <- function(x, ...){
+  ttest(x[, 1], x[, 2])
+}
+
+ttest.list <- function(x, ...){
+  ttest(x = x[[1]], y = x[[2]])
+}
+```
+
+## Does This Work?
+
+```{r}
+set.seed(123)
+TT <- ttest(rnorm(100, 0, 1), rnorm(100, 1, 1))
+TT 
+print(TT)
+plot(TT)
+Mx1x2 <- matrix(rnorm(60, 0, 1), nrow = 30)
+class(Mx1x2)
+TM <- ttest(Mx1x2)
+TM
+plot(TM)
+mylist <- list(xl = rnorm(30), yl = rnorm(30))
+class(mylist)
+ttest(mylist)
+plot(ttest(mylist))
+```
+
+## How To Package?
+
+What does the `ttest.R` file with `roxygen` look like?
+
+```
+#' Two-Sample Equal Variance t-Test
+#'
+#' @param x a non-empty numeric vector.
+#' @param y a non-empty numeric vector.
+#' @param alpha value to test hypothesis.
+#' @param alternative hypothesis (can take on one of three values).
+#' @param ... further arguments to be passed to or from methods.
+#'
+#' @return the answers!
+#' @export
+#'
+#' @examples
+#' T1 <- ttest(x = rnorm(300.5, 1), y = rnorm(30, 1, 1), alternative = "less")
+#' T1
+#' print(T1)
+#' plot(T1)
+#' Mx1x2 <- matrix(rnorm(60, 0, 1), nrow = 30)
+#' class(Mx1x2)
+#' TM <- ttest(x = Mx1x2)
+#' TM
+#' plot(TM)
+#' ttest(x = Mx1x2) # Test that a matrix will work
+#' mylist <- list(xl = rnorm(30), yl = rnorm(30))
+#' class(mylist)
+#' ttest(x = mylist, alternative = "greater")
+#' plot(ttest(mylist))
+#'
+ttest <- function(x, y, alpha = 1/20, alternative = "two.sided", ...){
+  if(is.null(class(x))){
+    class(x) <- data.class(x)
+  }
+  UseMethod("ttest")
+}
+
+
+
+#' @export
+ttest.default <- function(x, y, alpha = 1/20, alternative = "two.sided", ...){
+  choices <- c("two.sided", "greater", "less")
+  alt <- pmatch(alternative, choices)
+  alternative <- choices[alt]
+  # add some checks here
+  yok <- !is.na(y)
+  xok <- !is.na(x)
+  x <- x[xok]
+  y <- y[yok]
+  n1 <- length(x)
+  n2 <- length(y)
+  ndf <- n1 + n2 - 2
+  s2 <- ((n1 - 1)*var(x) + (n2 - 1)*var(y))/ndf
+  tstat <- (mean(x) - mean(y))/sqrt(s2*(1/n1 + 1/n2))
+  # tails
+  if(alternative == "two.sided"){
+    tail.area <- 2 * (1 - pt(abs(tstat), ndf))
+  } else if(alternative == "less") {
+    tail.area <- pt(tstat, ndf)
+  } else {
+    tail.area <- 1 - pt(tstat, ndf)
+  }
+  results <- list("t-stat" = tstat, d.f. = ndf, y1 = x, y2 = y,
+                  alternative = alternative, tail.area = tail.area,
+                  reject = tail.area < alpha, alpha = alpha)
+  class(results) <- "my.t.test"
+  results
+}
+
+#' @export
+print.my.t.test <- function(x, ...){
+  cat("\n")
+  cat("My Monday Night Modified 2 Sample Equal Variance t-test", "\n")
+  cat("\n")
+  cat(paste("Alternative hypothesis:", x[5]), "\n")
+  cat(paste("Reject the null hypothesis:", x[7]), "\n")
+  cat("\n")
+  print(round(unlist(x[c(1, 2, 6)]), 4))
+  invisible(x)
+}
+
+#' @export
+plot.my.t.test <- function(x, ...){
+  boxplot(x[c("y1", "y2")], col = "pink",
+          names = c("Sample 1", "Sample 2"), ...)
+}
+
+#' @export
+ttest.matrix <- function(x, ...){
+  ttest(x[, 1], x[, 2])
+}
+
+#' @export
+ttest.list <- function(x, ...){
+  ttest(x = x[[1]], y = x[[2]])
+}
+```
+
+Note: I documented the function `ttest` and exported `ttest` to the `namespace` using the tag `export`.  The various methods for `ttest` are exported using the `@export` tag but are not documented (my choice).
+
+```{r}
+methods(ttest)
+```
+
+```{r}
+methods(print)[111:120]
+```
+
+```{r}
+methods(plot)
+```
+
+```{r}
+getAnywhere(print.my.t.test)
+```
