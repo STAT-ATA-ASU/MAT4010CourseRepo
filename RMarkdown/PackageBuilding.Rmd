@@ -129,6 +129,72 @@ output:
 
 * Commit and push changes
 
+## Test Workflow
+
+To set up your package to use `testthat`, run the following:
+
+```{r, eval = FALSE}
+devtools::use_testthat()
+```
+
+This will:
+
+1. Create a `tests/testthat` directory
+2. Add `testthat` to the `Suggests` filed in the `DESCRIPTION`.
+3. Create a file `tests/testthat.R` that runs all your tests when `R CMD check` runs.
+
+To test your package use either `Ctrl/Cmd-Shift-T` or `devtools::test()`.  For more guidance, see the Testing chapter of [R Packges](http://r-pkgs.had.co.nz/tests.html).
+
+## Adding Data to Your Package
+
+There are three main ways to include data in your package, depending on what you
+want to do with it and who should be able to use it:
+
+* If you want to store binary data and make it available to the user, put it in `data/`.
+This is the best place to put example datasets.  The easiest way to create an `.RData` file is to use `devtools::use_data()`.  The `use_data()` function creates a binary file and places the file in the `data/` directory of your package.
+
+```{r, eval = FALSE}
+SomeData <- rnorm(100)
+use_data(SomeData, overwrite = TRUE)
+```
+
+Often, the data you include in `data/` is a cleaned-up version of raw data you’ve gathered from elsewhere. Hadley recommends taking the time to include the code used to do this in the source version of your package. This will make it easier for you to update or reproduce your version of the data. Hadley suggests that you put this code in `data-raw/`. You don’t need it in the bundled version of your package, so also add it to `.Rbuildignore`. You can do all this in one step with: `devtools::use_data_raw()`
+
+
+* If you want to store parsed data, but not make it available to the user, put it in `R/sysdata.rda`. This is the best place to put data that your functions need.
+
+* If you want to store raw data, put it in `inst/extdata`.  You may store raw data to show examples of loading/parsing raw (`.csv`, `.txt`, etc.) files.
+
+### Documenting Data Sets
+
+Objects in `data/` are always effectively exported. This means that they
+must be documented. Documenting data is like documenting a function, with a few
+minor differences. Instead of documenting the data directly, you document the name
+of the dataset. For example, the `roxygen2` block used to document the `AGGRESSION` data
+in `PASWR2` looks something like this:
+
+```
+#' @name AGGRESSION
+#' @title TV and Behavior
+#' @aliases AGGRESSION
+#' @docType data
+#' @description Data regarding the aggressive behavior in relation to exposure to violent television programs.
+#' @format A data frame with 16 observations on the following two variables: 
+#' \itemize{
+#' \item \code{violence} (an integer vector)
+#' \item \code{noviolence} (an integer vector)
+#' }
+#' @details This is data regarding aggressive behavior in relation to exposure to violent television programs from Gibbons (1997) with the following exposition: \dQuote{\ldots a group of children are matched as well as possible as regards home environment, genetic  factors, intelligence, parental attitudes, and so forth, in an effort to minimize factors other than TV that might influence a tendency for aggressive behavior.  In each of the resulting 16 pairs, one child is randomly selected to view the most violent shows on TV, while the other watches cartoons, situation comedies, and the like.  The children are then subjected to a series of tests designed to produce an ordinal measure of their aggression factors.} (pages 143-144)
+#' @source Gibbons, J. D. (1977) \emph{Nonparametric Methods for Quantitavie Analysis}. American Science Press.
+#' @references Ugarte, M. D., Militino, A. F., and Arnholt, A. T. 2015. \emph{Probability and Statistics with R}, Second Edition. Chapman & Hall / CRC.
+#' @examples
+#' with(data = AGGRESSION, 
+#' wilcox.test(violence, noviolence, paired = TRUE, alternative = "greater"))
+#' @keywords datasets
+"AGGRESSION"
+```
+
+The data sets documented with `roxygen2` should be stored in the `R/` directory of your package just as the documentation for functions.
 
 ## Automagic Generation of `R` Package References
 
