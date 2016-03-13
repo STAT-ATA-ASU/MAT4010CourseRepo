@@ -6,12 +6,18 @@ output:
   html_document: 
     highlight: textmate
     theme: readable
-bibliography: PackagesUsed.bib
+bibliography: 
+- PackagesUsed.bib
+- Rpackages.bib
+nocite: |
+  @wickham_r_2015
 ---
 
 ```{r, label = "SETUP", echo = FALSE, results= 'hide', message = FALSE, warning = FALSE}
 knitr::opts_chunk$set(comment = NA, fig.align = 'center', fig.height = 5, fig.width = 5,  warning = FALSE, message = FALSE, tidy.opts=list(blank = TRUE, width.cutoff = 75))
 ```
+
+Note: These are condensed notes primarily from Hadley Wickham's [*R packages*](http://r-pkgs.had.co.nz/) book.
 
 ## Create package structure
 
@@ -143,7 +149,7 @@ This will:
 2. Add `testthat` to the `Suggests` filed in the `DESCRIPTION`.
 3. Create a file `tests/testthat.R` that runs all your tests when `R CMD check` runs.
 
-To test your package use either `Ctrl/Cmd-Shift-T` or `devtools::test()`.  For more guidance, see the Testing chapter of [R Packges](http://r-pkgs.had.co.nz/tests.html).
+To test your package use either `Ctrl/Cmd-Shift-T` or `devtools::test()`.  For more guidance, see the Testing chapter of [*R packages*](http://r-pkgs.had.co.nz/tests.html).
 
 ## Adding Data to Your Package
 
@@ -196,6 +202,38 @@ in `PASWR2` looks something like this:
 
 The data sets documented with `roxygen2` should be stored in the `R/` directory of your package just as the documentation for functions.
 
+## Using Travis CI
+
+[Travis](http://travis-ci.org) is a continuous integration service, which means that it runs automated testing code everytime you push to GitHub. For open source projects, Travis provides 50 minutes of free computation on a Ubuntu server for every push. For an R package, the most useful code to run is `devtools::check()`.
+
+To use Travis:
+
+1. Run `devtools::use_travis()` to set up a basic `.travis.yml` config file. If your `R` package doesn’t need any system dependencies beyond those specified in your `DESCRIPTION` file, your `.travis.yml` can simply be
+
+```{r, eval = FALSE}
+language: r
+```
+
+Using the package cache to store `R` package dependencies can significantly speed up build times and is recommended for most builds.
+
+```{r, eval = FALSE}
+language: r
+cache: packages
+```
+
+Read the [Building an R Project with Travis CI](https://docs.travis-ci.com/user/languages/r) documentation for more information.
+
+
+
+2. Navigate to your [Travis](https://travis-ci.org/) account (Click on your name in the top right of the screen > Accounts) and enable Travis for the repo you want to test.
+
+3. Commit and push to GitHub.
+
+Wait a few minutes to see the results in your email.
+
+With this setup in place, every time you push to GitHub, and every time someone submits a pull request, `devtools::check()` will be automatically run. You’ll find out about failures right away, which makes them easier to fix. 
+
+
 ## Automagic Generation of `R` Package References
 
 Suppose the following `R` packages are used for a project: `simplemathr`, `DT`, `ggplot2`, `ISLR`, `knitr`, `plotly`, and `rmarkdown`.  
@@ -228,19 +266,19 @@ output: html_document
 ```
 
 ```{r, echo = FALSE, message = FALSE, results = 'hide'}
-PackagesUsed <- c("simplemathr", "DT", "ggplot2", "ISLR", "knitr", "plotly", "rmarkdown")
+PackagesUsed <- c("simplemathr", "DT", "ggplot2", "ISLR", "knitr", "plotly", "rmarkdown", "roxygen2")
 # Write bib information
 knitr::write_bib(PackagesUsed, file = "./PackagesUsed.bib")
 # Load packages
 lapply(PackagesUsed, library, character.only = TRUE)
 ```
 
-This document uses `simplemathr` by @R-simplemathr, `DT` by @R-DT, `ggplot2` by @R-ggplot2, `ISLR` by @R-ISLR, `plotly` by @R-plotly, `rmarkdown` by @R-rmarkdown, and `knitr` by @R-knitr.  
+This document uses `simplemathr` by @R-simplemathr, `DT` by @R-DT, `ggplot2` by @R-ggplot2, `ISLR` by @R-ISLR, `plotly` by @R-plotly, `rmarkdown` by @R-rmarkdown, `roxygen2` by @R-roxygen2, and `knitr` by @R-knitr.  
 
 The previous line with citations was created using:
 
 ```
-This document uses `simplemathr` by @R-simplemathr, `DT` by @R-DT, `ggplot2` by @R-ggplot2, `ISLR` by @R-ISLR, `plotly` by @R-plotly, `rmarkdown` by @R-rmarkdown, and `knitr` by @R-knitr.  
+This document uses `simplemathr` by @R-simplemathr, `DT` by @R-DT, `ggplot2` by @R-ggplot2, `ISLR` by @R-ISLR, `plotly` by @R-plotly, `rmarkdown` by @R-rmarkdown, `roxygen2` by @R-roxygen2, and `knitr` by @R-knitr.  
 ```
 ## References
 

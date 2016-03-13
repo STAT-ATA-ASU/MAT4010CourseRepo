@@ -115,6 +115,7 @@ $(document).ready(function () {
 </div>
 
 
+<p>Note: These are condensed notes primarily from Hadley Wickham’s <a href="http://r-pkgs.had.co.nz/"><em>R packages</em></a> book.</p>
 <div id="create-package-structure" class="section level2">
 <h2>Create package structure</h2>
 <ul>
@@ -239,7 +240,7 @@ git push -u origin master</code></pre>
 <li>Add <code>testthat</code> to the <code>Suggests</code> filed in the <code>DESCRIPTION</code>.</li>
 <li>Create a file <code>tests/testthat.R</code> that runs all your tests when <code>R CMD check</code> runs.</li>
 </ol>
-<p>To test your package use either <code>Ctrl/Cmd-Shift-T</code> or <code>devtools::test()</code>. For more guidance, see the Testing chapter of <a href="http://r-pkgs.had.co.nz/tests.html">R Packges</a>.</p>
+<p>To test your package use either <code>Ctrl/Cmd-Shift-T</code> or <code>devtools::test()</code>. For more guidance, see the Testing chapter of <a href="http://r-pkgs.had.co.nz/tests.html"><em>R packages</em></a>.</p>
 </div>
 <div id="adding-data-to-your-package" class="section level2">
 <h2>Adding Data to Your Package</h2>
@@ -278,6 +279,25 @@ use_data(SomeData, overwrite = TRUE)</code></pre>
 <p>The data sets documented with <code>roxygen2</code> should be stored in the <code>R/</code> directory of your package just as the documentation for functions.</p>
 </div>
 </div>
+<div id="using-travis-ci" class="section level2">
+<h2>Using Travis CI</h2>
+<p><a href="http://travis-ci.org">Travis</a> is a continuous integration service, which means that it runs automated testing code everytime you push to GitHub. For open source projects, Travis provides 50 minutes of free computation on a Ubuntu server for every push. For an R package, the most useful code to run is <code>devtools::check()</code>.</p>
+<p>To use Travis:</p>
+<ol style="list-style-type: decimal">
+<li>Run <code>devtools::use_travis()</code> to set up a basic <code>.travis.yml</code> config file. If your <code>R</code> package doesn’t need any system dependencies beyond those specified in your <code>DESCRIPTION</code> file, your <code>.travis.yml</code> can simply be</li>
+</ol>
+<pre class="r"><code>language: r</code></pre>
+<p>Using the package cache to store <code>R</code> package dependencies can significantly speed up build times and is recommended for most builds.</p>
+<pre class="r"><code>language: r
+cache: packages</code></pre>
+<p>Read the <a href="https://docs.travis-ci.com/user/languages/r">Building an R Project with Travis CI</a> documentation for more information.</p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Navigate to your <a href="https://travis-ci.org/">Travis</a> account (Click on your name in the top right of the screen &gt; Accounts) and enable Travis for the repo you want to test.</p></li>
+<li><p>Commit and push to GitHub.</p></li>
+</ol>
+<p>Wait a few minutes to see the results in your email.</p>
+<p>With this setup in place, every time you push to GitHub, and every time someone submits a pull request, <code>devtools::check()</code> will be automatically run. You’ll find out about failures right away, which makes them easier to fix.</p>
+</div>
 <div id="automagic-generation-of-r-package-references" class="section level2">
 <h2>Automagic Generation of <code>R</code> Package References</h2>
 <p>Suppose the following <code>R</code> packages are used for a project: <code>simplemathr</code>, <code>DT</code>, <code>ggplot2</code>, <code>ISLR</code>, <code>knitr</code>, <code>plotly</code>, and <code>rmarkdown</code>.</p>
@@ -302,16 +322,18 @@ date: 'Mar 13, 2016'
 bibliography: PackagesUsed.bib
 output: html_document
 ---</code></pre>
-<p>This document uses <code>simplemathr</code> by <span class="citation">Arnholt, Kreiling, and Jones (2016)</span>, <code>DT</code> by <span class="citation">Xie (2015)</span>, <code>ggplot2</code> by <span class="citation">Wickham and Chang (2016)</span>, <code>ISLR</code> by <span class="citation">James et al. (2013)</span>, <code>plotly</code> by <span class="citation">Sievert et al. (2015)</span>, <code>rmarkdown</code> by <span class="citation">Allaire et al. (2016)</span>, and <code>knitr</code> by <span class="citation">Xie (2016)</span>.</p>
+<p>This document uses <code>simplemathr</code> by <span class="citation">Arnholt, Kreiling, and Jones (2016)</span>, <code>DT</code> by <span class="citation">Xie (2015)</span>, <code>ggplot2</code> by <span class="citation">Wickham and Chang (2016)</span>, <code>ISLR</code> by <span class="citation">James et al. (2013)</span>, <code>plotly</code> by <span class="citation">Sievert et al. (2015)</span>, <code>rmarkdown</code> by <span class="citation">Allaire et al. (2016)</span>, <code>roxygen2</code> by <span class="citation">Wickham, Danenberg, and Eugster (2015)</span>, and <code>knitr</code> by <span class="citation">Xie (2016)</span>.</p>
 <p>The previous line with citations was created using:</p>
-<pre><code>This document uses `simplemathr` by @R-simplemathr, `DT` by @R-DT, `ggplot2` by @R-ggplot2, `ISLR` by @R-ISLR, `plotly` by @R-plotly, `rmarkdown` by @R-rmarkdown, and `knitr` by @R-knitr.  </code></pre>
+<pre><code>This document uses `simplemathr` by @R-simplemathr, `DT` by @R-DT, `ggplot2` by @R-ggplot2, `ISLR` by @R-ISLR, `plotly` by @R-plotly, `rmarkdown` by @R-rmarkdown, `roxygen2` by @R-roxygen2, and `knitr` by @R-knitr.  </code></pre>
 <div class="references">
 <h2>References</h2>
 <p>Allaire, JJ, Joe Cheng, Yihui Xie, Jonathan McPherson, Winston Chang, Jeff Allen, Hadley Wickham, Aron Atkins, and Rob Hyndman. 2016. <em>Rmarkdown: Dynamic Documents for R</em>. <a href="http://CRAN.R-project.org/package=rmarkdown" class="uri">http://CRAN.R-project.org/package=rmarkdown</a>.</p>
 <p>Arnholt, Alan, Erin Kreiling, and Ben Jones. 2016. <em>Simplemathr: Simple Math Stuff</em>. <a href="https://github.com/alanarnholt/simplemathr" class="uri">https://github.com/alanarnholt/simplemathr</a>.</p>
 <p>James, Gareth, Daniela Witten, Trevor Hastie, and Rob Tibshirani. 2013. <em>ISLR: Data for an Introduction to Statistical Learning with Applications in R</em>. <a href="http://CRAN.R-project.org/package=ISLR" class="uri">http://CRAN.R-project.org/package=ISLR</a>.</p>
 <p>Sievert, Carson, Chris Parmer, Toby Hocking, Scott Chamberlain, Karthik Ram, Marianne Corvellec, and Pedro Despouy. 2015. <em>Plotly: Create Interactive Web Graphics via Plotly’s JavaScript Graphing Library</em>. <a href="http://CRAN.R-project.org/package=plotly" class="uri">http://CRAN.R-project.org/package=plotly</a>.</p>
+<p>Wickham, Hadley. 2015. <em>R Packages</em>. First edition. Sebastopol, CA: O’Reilly Media.</p>
 <p>Wickham, Hadley, and Winston Chang. 2016. <em>Ggplot2: An Implementation of the Grammar of Graphics</em>. <a href="http://CRAN.R-project.org/package=ggplot2" class="uri">http://CRAN.R-project.org/package=ggplot2</a>.</p>
+<p>Wickham, Hadley, Peter Danenberg, and Manuel Eugster. 2015. <em>Roxygen2: In-Source Documentation for R</em>. <a href="http://CRAN.R-project.org/package=roxygen2" class="uri">http://CRAN.R-project.org/package=roxygen2</a>.</p>
 <p>Xie, Yihui. 2015. <em>DT: A Wrapper of the JavaScript Library ’DataTables’</em>. <a href="http://CRAN.R-project.org/package=DT" class="uri">http://CRAN.R-project.org/package=DT</a>.</p>
 <p>———. 2016. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in R</em>. <a href="http://CRAN.R-project.org/package=knitr" class="uri">http://CRAN.R-project.org/package=knitr</a>.</p>
 </div>
