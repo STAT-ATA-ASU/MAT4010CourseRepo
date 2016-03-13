@@ -84,6 +84,10 @@ Watch the following Videos:
 
 **Mar 14:**
 
+* SHA for individual notes
+* Go over adding data to packages - see [abbreviated notes](../RMarkdown/PackageBuilding.html) or [R Packages](http://r-pkgs.had.co.nz/data.html) for more detail.
+* Work on Group packages
+
 **Mar 21:**
 
 **~~Mar 28:~~ No Class**
