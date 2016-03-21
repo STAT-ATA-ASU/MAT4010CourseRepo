@@ -61,7 +61,7 @@ Watch the following Videos:
 **Feb 15:**
 
 * Discuss chapters [five and six](../RMarkdown/Chapters5and6.html) of _Hands-On Programming with R_
-* Disucss chapters five and six of _R Packages_
+* Discuss chapters five and six of _R Packages_
 * Read and summarize chapter [seven](../RMarkdown/Chapter7.html) of _Hands-On Programming with R_ in an Rmarkdown document.
 * Read chapter 7 (_Testing_) of _R Packages_
 * [Unit Testing Slides](http://www.is.uni-freiburg.de/ressourcen/algorithm-design-and-software-engineering-oeffentlicher-zugriff/11_softwaretesting.pdf)
@@ -78,7 +78,7 @@ Watch the following Videos:
 * [Documenting S3 Classes, Generics, and Methods](../RMarkdown/OOP.html)
 * Make sure Travis-CI is passing
 * Work on Group packages - (Individual assignments to follow)
-* Push indiviudal notes from chapters 1-7 (one document) to your private repositories before leaving on Spring Break.  
+* Push individual notes from chapters 1-7 (one document) to your private repositories before leaving on Spring Break.  
 
 **~~Mar 7 - Mar 11~~ No Class - Spring Break**
 
