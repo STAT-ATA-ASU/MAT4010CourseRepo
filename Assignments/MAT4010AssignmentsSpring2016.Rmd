@@ -90,6 +90,9 @@ Watch the following Videos:
 
 **Mar 21:**
 
+* [Creating data frames from contingency tables](../RMarkdown/CTtoDF.html)
+* Work on Group packages
+
 **~~Mar 28:~~ No Class**
 
 **Apr 4:**

@@ -1,0 +1,75 @@
+---
+title: "Creating Data Frames from Contingency Tables"
+author: "Alan Arnholt"
+date: 'Last Updated: `r Sys.Date()`'
+output: 
+  html_document: 
+    highlight: textmate
+    theme: readable
+---
+
+```{r, label = "SETUP", echo = FALSE, results= 'hide', message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(comment = NA, fig.align = 'center', fig.height = 5, fig.width = 5,  warning = FALSE, message = FALSE, tidy.opts=list(blank = TRUE, width.cutoff = 75))
+```
+
+Journal articles and books often present information in contingency tables.  This document briefly considers how to store the information from a contingency table as a data frame.  Consider the contingency table `mat` stored as a matrix.
+
+```{r}
+mat <- matrix(data = c(56, 35, 61, 43, 54, 61, 21, 42, 8, 19), nrow = 2)
+dimnames(mat) <- list(gender = c("girls", "boys"), ability = c("hopeless", "belowavg", "average", "aboveavg", "superior"))
+mat
+class(mat)
+```
+
+One approach to create a data frame from a contingency table is to use the `expand.dft` function from the `vcdExtra` package.
+
+1. If the data is stored in a matrix, convert it to class `table`
+
+```{r}
+matT <- as.table(mat)
+matT
+class(matT)
+```
+
+2. Convert the table object to a data frame using `as.data.frame`.
+
+```{r}
+matDF <- as.data.frame(matT)
+matDF
+class(matDF)
+```
+
+3. Convert the frequency form data frame to a data frame using the `expand.dft` function.
+
+```{r}
+DF <- vcdExtra::expand.dft(matDF)
+head(DF)
+class(DF)
+```
+
+Consider creating a contingency table from the data frame `DF`.
+
+```{r}
+CT <- xtabs(~gender + ability, data = DF)
+CT
+chisq.test(CT)
+```
+
+## Randomization Test
+
+```{r}
+set.seed(2)
+N <- 10^4 - 1 # Change this for slower computers
+result <- numeric(N)
+for (i in 1:N) {
+T2 <- xtabs(~ sample(gender) + ability, data = DF)
+result[i] <- chisq.test(T2)$statistic
+}
+obs <- chisq.test(xtabs(~ gender + ability, data = DF))$statistic
+obs
+pvalue <- (sum(result >= obs) + 1)/(N + 1)
+pvalue
+```
+
+
+
