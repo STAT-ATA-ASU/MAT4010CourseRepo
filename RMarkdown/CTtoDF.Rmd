@@ -6,6 +6,7 @@ output:
   html_document: 
     highlight: textmate
     theme: readable
+    code_folding: hide
 ---
 
 ```{r, label = "SETUP", echo = FALSE, results= 'hide', message = FALSE, warning = FALSE}
