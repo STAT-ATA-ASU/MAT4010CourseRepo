@@ -92,6 +92,7 @@ Watch the following Videos:
 
 * [Creating data frames from contingency tables](../RMarkdown/CTtoDF.html)
 * Work on Group packages
+* [Tidy Data Article](https://www.jstatsoft.org/article/view/v059i10)
 
 **~~Mar 28:~~ No Class**
 
