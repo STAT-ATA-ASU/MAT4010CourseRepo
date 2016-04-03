@@ -2,15 +2,16 @@
 title: "Package Building Using RStudio"
 author: "Alan Arnholt"
 date: 'Last Updated: `r Sys.Date()`'
-output: 
-  html_document: 
+output:
+  pdf_document: default
+  html_document:
     highlight: textmate
     theme: readable
-bibliography: 
-- PackagesUsed.bib
-- Rpackages.bib
 nocite: |
   @wickham_r_2015
+bibliography:
+- PackagesUsed.bib
+- Rpackages.bib
 ---
 
 ```{r, label = "SETUP", echo = FALSE, results= 'hide', message = FALSE, warning = FALSE}
