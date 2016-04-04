@@ -101,7 +101,7 @@ Watch the following Videos:
 * Discuss and walk through making pull requests. [This is a work in progress](../RMarkdown/BranchesPullRequests.html)
 * Read Chapter 13 of [R Packages](http://r-pkgs.had.co.nz/git.html)
 * [Using pull requests](https://help.github.com/articles/using-pull-requests/)
-* Work on groups packages
+* Work on group packages
 
 **Apr 11:**
 
