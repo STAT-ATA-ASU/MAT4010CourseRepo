@@ -1,3 +1,3 @@
-# MAT 4010 Spring 2016 
+# MAT 4010 Course Repo 
 
-Web page for [MAT 4010 Spring 2016](http://stat-ata-asu.github.io/MAT4010Spring2016/)
+Web page for [MAT 4010](http://stat-ata-asu.github.io/MAT4010CourseRepo/)
