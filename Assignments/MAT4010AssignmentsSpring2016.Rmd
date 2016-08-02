@@ -6,7 +6,7 @@ output:
   html_document:
     css: asu.css
     highlight: textmate
-    theme: readable
+    theme: cosmo
 ---
 
 **Jan 11:**
@@ -115,5 +115,7 @@ devtools::install_github('rstudio/bookdown')
 **Apr 25:**
 
 **May 2:**
+
+***
 
 #[Home Page](http://stat-ata-asu.github.io/MAT4010Spring2016/) - [Syllabus](http://stat-ata-asu.github.io/MAT4010Spring2016/Syllabus/MAT4010SyllabusSpring2016.html) - [Piazza](https://piazza.com/class/ij30uq82d4p2di)
